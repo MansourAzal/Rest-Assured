@@ -8,14 +8,15 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PetTests extends BaseTest {
 
-    Faker faker;
-    Pet petPayload;
-    String[] statuses = {"available", "pending", "sold"};
+    private Faker faker;
+    private Pet petPayload;
+    private String[] statuses = {"available", "pending", "sold"};
 
     @BeforeClass
     public void setupData() {
@@ -36,17 +37,15 @@ public class PetTests extends BaseTest {
         photos.add(faker.internet().url());
         petPayload.setPhotoUrls(photos);
 
-        Pet.Tag tag1 = new Pet.Tag();
-        tag1.setId(faker.number().randomDigit());
-        tag1.setName(faker.color().name());
-
-        Pet.Tag tag2 = new Pet.Tag();
-        tag2.setId(faker.number().randomDigit());
-        tag2.setName(faker.book().genre());
-
         List<Pet.Tag> tags = new ArrayList<>();
-        tags.add(tag1);
-        tags.add(tag2);
+        Pet.Tag t1 = new Pet.Tag();
+        t1.setId(faker.number().randomDigit());
+        t1.setName(faker.color().name());
+        Pet.Tag t2 = new Pet.Tag();
+        t2.setId(faker.number().randomDigit());
+        t2.setName(faker.book().genre());
+        tags.add(t1);
+        tags.add(t2);
         petPayload.setTags(tags);
 
         logInfo("Test data setup completed for Pet ID: " + petPayload.getId());
@@ -62,17 +61,17 @@ public class PetTests extends BaseTest {
 
     @Test(priority = 2, dependsOnMethods = {"testPostPet"})
     public void testGetPet() throws InterruptedException {
-        Response getResponse = retryPetOperation(petPayload.getId(), "GET", petPayload);
-        getResponse.then().log().all();
-        logInfo("GET Pet response: " + getResponse.getBody().asString());
-        Assert.assertEquals(getResponse.getStatusCode(), 200);
-        Assert.assertEquals(getResponse.jsonPath().getString("name"), petPayload.getName());
+        Response response = retryPetOperation(petPayload.getId(), "GET", petPayload);
+        response.then().log().all();
+        logInfo("GET Pet response: " + response.getBody().asString());
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(response.jsonPath().getString("name"), petPayload.getName());
     }
 
     @Test(priority = 3, dependsOnMethods = {"testPostPet"})
     public void testUpdatePet() throws InterruptedException {
-        petPayload.setStatus(statuses[faker.number().numberBetween(0, statuses.length)]);
         petPayload.setName(faker.name().firstName());
+        petPayload.setStatus(statuses[faker.number().numberBetween(0, statuses.length)]);
 
         Response response = PetEndpoints.updatePet(petPayload);
         response.then().log().all();
@@ -88,13 +87,8 @@ public class PetTests extends BaseTest {
     @Test(priority = 4, dependsOnMethods = {"testGetPet"})
     public void testDeletePet() throws InterruptedException {
         Response response = retryPetOperation(petPayload.getId(), "DELETE", petPayload);
-
         response.then().log().all();
         logInfo("DELETE Pet response: " + response.getBody().asString());
-
-        // Accept 200 (deleted) or 404 (already deleted)
-        Assert.assertTrue(response.getStatusCode() == 200 || response.getStatusCode() == 404,
-                "Expected 200 or 404 but found " + response.getStatusCode());
+        Assert.assertTrue(response.getStatusCode() == 200 || response.getStatusCode() == 404);
     }
-
 }

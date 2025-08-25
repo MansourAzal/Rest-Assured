@@ -21,7 +21,7 @@ public class PetCSVTests extends BaseTest {
         return CSVUtility.getCSVData(CSV_PATH);
     }
 
-    // Helper to build Pet object
+    // Reusable helper to build Pet object
     private Pet buildPet(String id, String name, String status, String categoryId, String categoryName,
                          String photo1, String photo2, String tag1Id, String tag1Name, String tag2Id, String tag2Name) {
 
@@ -36,21 +36,23 @@ public class PetCSVTests extends BaseTest {
         pet.setCategory(category);
 
         List<String> photos = new ArrayList<>();
-        photos.add(photo1);
-        photos.add(photo2);
+        if (photo1 != null && !photo1.isEmpty()) photos.add(photo1);
+        if (photo2 != null && !photo2.isEmpty()) photos.add(photo2);
         pet.setPhotoUrls(photos);
 
         List<Pet.Tag> tags = new ArrayList<>();
-        Pet.Tag t1 = new Pet.Tag();
-        t1.setId(Integer.parseInt(tag1Id));
-        t1.setName(tag1Name);
-
-        Pet.Tag t2 = new Pet.Tag();
-        t2.setId(Integer.parseInt(tag2Id));
-        t2.setName(tag2Name);
-
-        tags.add(t1);
-        tags.add(t2);
+        if (tag1Id != null && tag1Name != null) {
+            Pet.Tag t1 = new Pet.Tag();
+            t1.setId(Integer.parseInt(tag1Id));
+            t1.setName(tag1Name);
+            tags.add(t1);
+        }
+        if (tag2Id != null && tag2Name != null) {
+            Pet.Tag t2 = new Pet.Tag();
+            t2.setId(Integer.parseInt(tag2Id));
+            t2.setName(tag2Name);
+            tags.add(t2);
+        }
         pet.setTags(tags);
 
         return pet;
@@ -82,7 +84,7 @@ public class PetCSVTests extends BaseTest {
                 "Pet name mismatch! Expected: " + name + " or " + name + "_updated, Actual: " + actualName);
     }
 
-    @Test(priority = 3, dependsOnMethods = {"testPostPet"}, dataProvider = "petData")
+    @Test(priority = 3, dependsOnMethods = {"testGetPet"}, dataProvider = "petData")
     public void testUpdatePet(String id, String name, String status, String categoryId, String categoryName,
                               String photo1, String photo2, String tag1Id, String tag1Name, String tag2Id, String tag2Name) {
 

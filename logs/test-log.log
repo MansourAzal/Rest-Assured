@@ -1,1 +1,20 @@
-2025-08-25 12:21:00 [main] INFO  baseTest.BaseTest - DELETE Pet response: {"code":200,"type":"unknown","message":"1003"}
+2025-08-25 17:52:25 [main] INFO  baseTest.BaseTest - Test data setup completed for Pet ID: 5626
+2025-08-25 17:52:26 [main] INFO  baseTest.BaseTest - POST Pet response: {"id":5626,"category":{"id":8,"name":"raccoon"},"name":"Marguerita","photoUrls":["www.stanton-hintz.biz","www.bill-oreilly.io"],"tags":[{"id":3,"name":"green"},{"id":3,"name":"Fable"}],"status":"available"}
+2025-08-25 17:52:26 [main] INFO  baseTest.BaseTest - Pet not found. Creating pet for retry: ID 5626
+2025-08-25 17:52:28 [main] INFO  baseTest.BaseTest - GET Pet response: {"id":5626,"category":{"id":8,"name":"raccoon"},"name":"Marguerita","photoUrls":["www.stanton-hintz.biz","www.bill-oreilly.io"],"tags":[{"id":3,"name":"green"},{"id":3,"name":"Fable"}],"status":"available"}
+2025-08-25 17:52:28 [main] INFO  baseTest.BaseTest - UPDATE Pet response: {"id":5626,"category":{"id":8,"name":"raccoon"},"name":"Ty","photoUrls":["www.stanton-hintz.biz","www.bill-oreilly.io"],"tags":[{"id":3,"name":"green"},{"id":3,"name":"Fable"}],"status":"sold"}
+2025-08-25 17:52:28 [main] INFO  baseTest.BaseTest - GET after UPDATE Pet response: {"id":5626,"category":{"id":8,"name":"raccoon"},"name":"Ty","photoUrls":["www.stanton-hintz.biz","www.bill-oreilly.io"],"tags":[{"id":3,"name":"green"},{"id":3,"name":"Fable"}],"status":"sold"}
+2025-08-25 17:52:28 [main] INFO  baseTest.BaseTest - DELETE Pet response: {"code":200,"type":"unknown","message":"5626"}
+2025-08-25 17:52:29 [main] INFO  baseTest.BaseTest - POST Pet response: {"id":1001,"category":{"id":1,"name":"Dog"},"name":"Buddy","photoUrls":["url1.com","url2.com"],"tags":[{"id":1,"name":"Red"},{"id":2,"name":"Fiction"}],"status":"available"}
+2025-08-25 17:52:29 [main] INFO  baseTest.BaseTest - POST Pet response: {"id":1002,"category":{"id":2,"name":"Cat"},"name":"Max","photoUrls":["url3.com","url4.com"],"tags":[{"id":3,"name":"Blue"},{"id":4,"name":"Mystery"}],"status":"pending"}
+2025-08-25 17:52:29 [main] INFO  baseTest.BaseTest - POST Pet response: {"id":1003,"category":{"id":3,"name":"Bird"},"name":"Bella","photoUrls":["url5.com","url6.com"],"tags":[{"id":5,"name":"Green"},{"id":6,"name":"Adventure"}],"status":"sold"}
+2025-08-25 17:52:29 [main] INFO  baseTest.BaseTest - Pet not found. Creating pet for retry: ID 1001
+2025-08-25 17:52:30 [main] INFO  baseTest.BaseTest - GET Pet response: {"id":1001,"category":{"id":1,"name":"Dog"},"name":"Buddy","photoUrls":["url1.com","url2.com"],"tags":[{"id":1,"name":"Red"},{"id":2,"name":"Fiction"}],"status":"available"}
+2025-08-25 17:52:30 [main] INFO  baseTest.BaseTest - GET Pet response: {"id":1002,"category":{"id":2,"name":"Cat"},"name":"Max","photoUrls":["url3.com","url4.com"],"tags":[{"id":3,"name":"Blue"},{"id":4,"name":"Mystery"}],"status":"pending"}
+2025-08-25 17:52:31 [main] INFO  baseTest.BaseTest - GET Pet response: {"id":1003,"category":{"id":3,"name":"Bird"},"name":"Bella","photoUrls":["url5.com","url6.com"],"tags":[{"id":5,"name":"Green"},{"id":6,"name":"Adventure"}],"status":"sold"}
+2025-08-25 17:52:31 [main] INFO  baseTest.BaseTest - UPDATE Pet response: {"id":1001,"category":{"id":1,"name":"Dog"},"name":"Buddy_updated","photoUrls":["url1.com","url2.com"],"tags":[{"id":1,"name":"Red"},{"id":2,"name":"Fiction"}],"status":"pending"}
+2025-08-25 17:52:31 [main] INFO  baseTest.BaseTest - UPDATE Pet response: {"id":1002,"category":{"id":2,"name":"Cat"},"name":"Max_updated","photoUrls":["url3.com","url4.com"],"tags":[{"id":3,"name":"Blue"},{"id":4,"name":"Mystery"}],"status":"available"}
+2025-08-25 17:52:31 [main] INFO  baseTest.BaseTest - UPDATE Pet response: {"id":1003,"category":{"id":3,"name":"Bird"},"name":"Bella_updated","photoUrls":["url5.com","url6.com"],"tags":[{"id":5,"name":"Green"},{"id":6,"name":"Adventure"}],"status":"available"}
+2025-08-25 17:52:31 [main] INFO  baseTest.BaseTest - DELETE Pet response: {"code":200,"type":"unknown","message":"1001"}
+2025-08-25 17:52:32 [main] INFO  baseTest.BaseTest - DELETE Pet response: {"code":200,"type":"unknown","message":"1002"}
+2025-08-25 17:52:32 [main] INFO  baseTest.BaseTest - DELETE Pet response: {"code":200,"type":"unknown","message":"1003"}
