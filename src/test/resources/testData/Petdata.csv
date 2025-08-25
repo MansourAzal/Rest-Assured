@@ -1,0 +1,4 @@
+ID,Name,Status,Category_ID,Category_Name,PhotoURL_1,PhotoURL_2,Tag1_ID,Tag1_Name,Tag2_ID,Tag2_Name
+1001,Buddy,available,1,Dog,url1.com,url2.com,1,Red,2,Fiction
+1002,Max,pending,2,Cat,url3.com,url4.com,3,Blue,4,Mystery
+1003,Bella,sold,3,Bird,url5.com,url6.com,5,Green,6,Adventure
