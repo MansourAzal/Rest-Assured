@@ -70,19 +70,31 @@ public class PetTests extends BaseTest {
 
     @Test(priority = 3, dependsOnMethods = {"testPostPet"})
     public void testUpdatePet() throws InterruptedException {
+        // update with a new name + deterministic status
         petPayload.setName(faker.name().firstName());
-        petPayload.setStatus(statuses[faker.number().numberBetween(0, statuses.length)]);
+        petPayload.setStatus("pending"); // Always use a known value
 
+        // send update request
         Response response = PetEndpoints.updatePet(petPayload);
         response.then().log().all();
         logInfo("UPDATE Pet response: " + response.getBody().asString());
         Assert.assertEquals(response.getStatusCode(), 200);
 
+        // verify with GET
         Response getResponse = retryPetOperation(petPayload.getId(), "GET", petPayload);
         getResponse.then().log().all();
-        logInfo("GET after UPDATE Pet response: " + getResponse.getBody().asString());
-        Assert.assertEquals(getResponse.jsonPath().getString("status"), petPayload.getStatus());
+
+        String actualStatus = getResponse.jsonPath().getString("status");
+        logInfo("Expected status: " + petPayload.getStatus() + ", Actual: " + actualStatus);
+
+        // assertion
+        Assert.assertEquals(
+                actualStatus,
+                petPayload.getStatus(),
+                "Pet status did not update correctly!"
+        );
     }
+
 
     @Test(priority = 4, dependsOnMethods = {"testGetPet"})
     public void testDeletePet() throws InterruptedException {
